@@ -1,0 +1,12 @@
+[
+    {
+        "difficulty": "easy",
+        "sentence": ["Born is England, Norton spent most of his early life in South Africa. He immig", "to San Francisco i", "1849 af", "receiving a bequest o", "$40,000 from h", " father's  est",", arri","aboard t", " steam y", "Hurlothrumbo. Norton initially made a living as a businessman, but he lost his fortune investing in Peruvian"],
+        "correct_answers": ["rated", "n", "ter", "f", "is", "ate", "ving", "he", "ards"]
+    },
+    {
+        "difficulty": "medium",
+        "sentence": ["Baseball uniforms were first worn by the New York Knickerbockers Baseball Club in the 1800s. Their unif", "were pants ma", "of blue wool, white flannel shi", "and straw ha", "Since then, the unif", "have gone thr", "many cha", "More items, id","and many other impro", "were done and ad", "to baseball uniforms ov", "the years. The st", "of baseball uniforms al", "changed, little by little over time."],
+        "correct_answers": ["orms", "de", "rts", "ts", "orms", "ough", "ges", "eas", "vements", "ded", "er", "yle", "so"]
+    }
+]
