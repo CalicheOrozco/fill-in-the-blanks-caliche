@@ -28,7 +28,7 @@ function App() {
     const newFrases = frases;
     newFrases.splice(randomNumero, 1);
     setFrases(newFrases);
-    restart();
+    restart(); 
   };
 
   // function to restart the form
@@ -92,13 +92,14 @@ function App() {
       }
       // detect when you press down or left
       if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+        let prevPath = frase.correct_answers[finalNumbers[0] - 1]
         // if the input name has only one number
         if (finalNumbers.length === 1) {
           const previousInput =
           //  if the input is the first one
             finalNumbers[0] > 0
-              ? frase.correct_answers[finalNumbers[0] - 1].length - 1
-              : frase.correct_answers[0].length - 1;
+              ? prevPath.word.length - prevPath.start -1
+              : frase.correct_answers[0].word.length - frase.correct_answers[0].start -1
           // get the path of the previous input
           const path = `answer-${finalNumbers[0] - 1}-${previousInput}`;
           // if the previous input exists 
@@ -134,10 +135,11 @@ function App() {
           // if the input name has only one number
           if (finalNumbers.length === 1) {
             // get the previous input
+            let prevPath = frase.correct_answers[finalNumbers[0] - 1]
             const previousInput =
               finalNumbers[0] > 0
-                ? frase.correct_answers[finalNumbers[0] - 1].length - 1
-                : frase.correct_answers[0].length - 1;
+                ? prevPath.word.length - prevPath.start -1
+                : frase.correct_answers[0].word.length - frase.correct_answers[0].start -1
             const path = `answer-${finalNumbers[0] - 1}-${previousInput}`;
             // if the previous input exists
             if (getValues(path) || getValues(path) === "") {
@@ -146,9 +148,9 @@ function App() {
             }
             if (previousInput === 0) {
               // get the previous input
-              let test = `answer-${finalNumbers[0] - 1}`;
-              if (getValues(test) || getValues(test) === "") {
-                setFocus(test);
+              let path = `answer-${finalNumbers[0] - 1}`;
+              if (getValues(path) || getValues(path) === "") {
+                setFocus(path);
               }
             }
           } else {
@@ -194,7 +196,7 @@ function App() {
     setSubmited(true);
 
     // convert sentence.correct answers to object
-    const correct_answers = frase.correct_answers.reduce((acc, item, index) => {
+    const correct_answers = afterAnswers.reduce((acc, item, index) => {
       acc[`answer-${index}`] = item;
       return acc;
     }, {});
@@ -206,13 +208,16 @@ function App() {
     }
   };
 
+  let beforeAnswers = [];
+  let afterAnswers = [];
+
   return (
     <div className="App bg-black w-full min-h-screen flex items-center justify-center">
       {isStarted ? (
         frase ? (
           <div className="px-10">
             {/* Countdown */}
-            <div className="w-full flex justify-end">
+            <div className="w-full flex justify-end mt-3">
               <ReactCountdownClock
                 weight={10}
                 seconds={!submited ? 180 : 0}
@@ -229,24 +234,35 @@ function App() {
               </h1>
               <div className="flex flex-wrap">
                 {frase.sentence.map((item, index) => {
+                  
+                  if (index <= frase.correct_answers.length - 1) {
+
+                    const limit = frase.correct_answers[index].start;
+                    let answers = frase.correct_answers[index].word;
+                    let before = answers.slice(0, limit);
+                    let after = answers.slice(limit);
+                    beforeAnswers.push(before);
+                    afterAnswers.push(after);
+                  }
                   return (
                     <div className="flex flex-wrap" key={`div-${index}`}>
                       <span
-                        className="text-xl text-white"
+                        className="text-xl text-white mt-1"
                         key={`sentence-${index}`}
                       >
                         {item}
                       </span>
                       <div
-                        className="flex gap-0.5 mr-1"
+                        className="flex mx-1 mt-1"
                         key={`inputContainer-${index}`}
                       >
+                        {frase.correct_answers[index] ? <span className="text-xl text-white" key={`answerWord-${index}`}> {beforeAnswers[index]} </span> : null}
                         {!submited ? (
                           // frase.correct_answers[index].length
                           index === frase.sentence.length - 1 ? null : (
                             // repeat the input the times of frase.correct_answers.length
                             Array.from(
-                              { length: frase.correct_answers[index].length },
+                              { length: frase.correct_answers[index].word.length - frase.correct_answers[index].start },
                               (v, i) => {
                                 return (
                                   // onChange detect when the input is full go to the next input
@@ -301,26 +317,26 @@ function App() {
                             )
                           )
                         ) : formData[`answer-${index}`] ===
-                          frase.correct_answers[index] ? (
+                          afterAnswers[index] ? (
                           <span
-                            className="text-xl text-green-600 mr-2"
+                            className="text-xl text-green-600"
                             key={`answer-${index}`}
                           >
-                            {frase.correct_answers[index]}
+                            {afterAnswers[index]}
                           </span>
                         ) : formData[`answer-${index}`] ? (
                           <span
-                            className="text-xl text-red-600 mr-2"
+                            className="text-xl text-red-600"
                             key={`answer-${index}`}
                           >
                             {formData[`answer-${index}`]}
                           </span>
                         ) : (
                           <span
-                            className="text-xl text-yellow-400  -600 mr-2"
+                            className="text-xl text-yellow-400"
                             key={`answer-${index}`}
                           >
-                            {frase.correct_answers[index]}
+                            {afterAnswers[index]}
                           </span>
                         )}
                       </div>
@@ -366,7 +382,7 @@ function App() {
                   <img
                     src="https://i.giphy.com/media/yziuK6WtDFMly/giphy.webp"
                     alt="gif"
-                    className=" w-96 h-80"
+                    className=" w-96 h-80 mt-3"
                   />
                 </div>
               ) : isCorrect === false ? (
@@ -375,7 +391,7 @@ function App() {
                   <img
                     src="https://i.giphy.com/media/S4BDGxHKIB6nW9PiyA/giphy.webp"
                     alt="gif"
-                    className="w-96 h-80"
+                    className="w-96 h-80 mt-3"
                   />
                 </div>
               ) : null}
