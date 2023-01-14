@@ -1,12 +1,14 @@
 [
     {
         "difficulty": "easy",
-        "sentence": ["Born is England, Norton spent most of his early life in South Africa. He immig", "to San Francisco i", "1849 af", "receiving a bequest o", "$40,000 from h", " father's  est",", arri","aboard t", " steam y", "Hurlothrumbo. Norton initially made a living as a businessman, but he lost his fortune investing in Peruvian"],
-        "correct_answers": ["rated", "n", "ter", "f", "is", "ate", "ving", "he", "ards"]
+        "sentence": ["Born is England, Norton spent most of his early life in South Africa. He", "to San Francisco", "1849", "receiving a bequest", "$40,000 from", " father's",",","aboard", " steam", "Hurlothrumbo. Norton initially made a living as a businessman, but he lost his fortune investing in Peruvian"],
+        "correct_answers": [ {"word": "immigrated", "start": 5}, {"word": "in", "start": 1 }, {"word": "after", "start": 2}, {"word": "of", "start": 1}, {"word": "his", "start": 1}, {"word": "estate", "start": 3}, {"word": "arriving", "start": 4},{"word": "the", "start": 1}, {"word": "yards", "start": 1}]
+        
     },
     {
         "difficulty": "medium",
-        "sentence": ["Baseball uniforms were first worn by the New York Knickerbockers Baseball Club in the 1800s. Their unif", "were pants ma", "of blue wool, white flannel shi", "and straw ha", "Since then, the unif", "have gone thr", "many cha", "More items, id","and many other impro", "were done and ad", "to baseball uniforms ov", "the years. The st", "of baseball uniforms al", "changed, little by little over time."],
-        "correct_answers": ["orms", "de", "rts", "ts", "orms", "ough", "ges", "eas", "vements", "ded", "er", "yle", "so"]
+        "sentence": ["Baseball uniforms were first worn by the New York Knickerbockers Baseball Club in the 1800s. Their", "were pants", "of blue wool, white flannel", "and straw", "Since then, the", "have gone", "many", "More items,","and many other", "were done and", "to baseball uniforms", "the years. The", "of baseball uniforms", "changed, little by little over time."],
+        "correct_answers": [ {"word": "uniforms", "start": 4}, {"word": "made", "start": 2 }, {"word": "shirts", "start": 3}, {"word": "hats", "start": 2}, {"word": "uniforms", "start": 4}, {"word": "through", "start": 3}, {"word": "changes", "start": 3},{"word": "ideas", "start": 2}, {"word": "improvements", "start": 5}, {"word": "added", "start": 2}, {"word": "over", "start": 2}, {"word": "style", "start": 2}, {"word": "also", "start": 2}]
+        
     }
 ]
